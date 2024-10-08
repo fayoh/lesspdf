@@ -4,7 +4,12 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "click>=8.1.7",
+    "pillow>=10.4.0",
+    "pymupdf>=1.24.11",
+    "term-image>=0.7.2",
+]
 
 [project.scripts]
 lesspdf = "lesspdf:main"
@@ -12,3 +17,10 @@ lesspdf = "lesspdf:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "mypy>=1.11.2",
+    "pytest-coverage>=0.0",
+    "pytest>=8.3.3",
+]

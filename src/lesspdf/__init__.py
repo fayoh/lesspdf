@@ -1,2 +1,8 @@
+"""lesspdf - A simple terminal PDF viewer."""
+
+from lesspdf import cli
+
+
 def main() -> None:
-    print("Hello from lesspdf!")
+    """Start the application."""
+    cli.main()
