@@ -1,5 +1,6 @@
 """CLI: handle user input and call application layer."""
 
+import os
 import signal
 import sys
 from collections.abc import Callable
