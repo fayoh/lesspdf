@@ -2,14 +2,14 @@
 
 import signal
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
-from typing import Callable, NoReturn
+from typing import NoReturn
 
 import click
 
-from lesspdf import document
 from lesspdf.application import Application, TerminalSetupError
 from lesspdf.document import Document, DocumentFileError
 

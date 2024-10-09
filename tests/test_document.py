@@ -29,4 +29,4 @@ def test_document_initialization_with_invalid_file() -> None:
         Document(invalid_file)
 
     # Assertions
-    assert str(exc_info.value) == f"File does not exist: {invalid_file}"
+    assert str(exc_info.value) == f"Could not open: {invalid_file}"

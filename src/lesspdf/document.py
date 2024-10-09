@@ -12,8 +12,12 @@ class Document:
         self.file: Path = path
         self.page_number: int = 0
         if not (self.file.exists() and self.file.is_file()):
-            raise DocumentFileError(f"File does not exist: {self.file}")
+            raise DocumentFileError(str(self.file))
 
 
 class DocumentFileError(Exception):
+
+    def __init__(self, file_path: str) -> None:
+        super().__init__(f"Could not open: {file_path}")
+
     """Error raised when a document file cannot be opened."""

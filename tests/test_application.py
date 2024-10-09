@@ -25,9 +25,12 @@ def test_application_init() -> None:
 
 def test_application_init_bad_file() -> None:
     """Minimal test."""
-    with pytest.raises(DocumentFileError, match=r"File does not") as exc_info:
+    non_existent_filename = "non-existent.pdf"
+    with pytest.raises(
+        DocumentFileError, match=f".*{non_existent_filename}"
+    ) as exc_info:
         Document(Path("non-existent.pdf"))
-    assert "File does not exist" in str(exc_info.value)
 
     with pytest.raises(DocumentFileError), as_file(resource_dir) as r_dir:
         Document(r_dir)
+    assert "Could not open" in str(exc_info.value)
