@@ -32,8 +32,5 @@ jobs:
     - name: Mypy
       run: uv run mypy src
 
-    - name: Run unit tests
-      run: uv run pytest tests
-
-    - name: Calculate coverage
-      run: uv run pytest --cov=src --cov-report=xml tests
+    - name: Run unit tests and calculate coverage
+      run: uv run pytest --cov=lesspdf --cov-fail-under 75 tests
