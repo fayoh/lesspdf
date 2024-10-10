@@ -33,4 +33,10 @@ jobs:
       run: uv run mypy src
 
     - name: Run unit tests and calculate coverage
-      run: uv run pytest --cov=lesspdf --cov-fail-under 78 tests
+      run: uv run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov-report=xml --cov=lesspdf --cov-fail-under 78 tests
+
+    - name: Pytest coverage comment
+      uses: MishaKav/pytest-coverage-comment@main
+      with:
+        pytest-xml-coverage-path: ./coverage.xml
+        junitxml-path: ./pytest.xml
