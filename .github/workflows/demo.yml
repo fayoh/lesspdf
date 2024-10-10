@@ -33,4 +33,4 @@ jobs:
       run: uv run mypy src
 
     - name: Run unit tests and calculate coverage
-      run: uv run pytest --cov=lesspdf --cov-fail-under 75 tests
+      run: uv run pytest --cov=lesspdf --cov-fail-under 78 tests
