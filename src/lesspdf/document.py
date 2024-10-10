@@ -1,6 +1,5 @@
 """Class for handling the document object."""
 
-
 from pathlib import Path
 
 
@@ -16,7 +15,6 @@ class Document:
 
 
 class DocumentFileError(Exception):
-
     def __init__(self, file_path: str) -> None:
         super().__init__(f"Could not open: {file_path}")
 
