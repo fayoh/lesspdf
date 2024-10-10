@@ -17,6 +17,7 @@ def test_document_initialization_with_valid_file(tmp_path) -> None:
     # Assertions
     assert doc.file == temp_file
     assert doc.page_number == 0
+    assert doc.page_number == 1
 
 
 def test_document_initialization_with_invalid_file() -> None:
