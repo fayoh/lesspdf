@@ -36,4 +36,6 @@ jobs:
       run: uv run mypy src
 
     - name: Run unit tests and calculate coverage
-      run: uv run pytest
+      run: |
+        uv run pytest
+        coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
