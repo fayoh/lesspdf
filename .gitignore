@@ -26,6 +26,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 *.lcov
+pytest.xml
 
 # IDE files
 .vscode
