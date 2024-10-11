@@ -3,7 +3,7 @@ name = "lesspdf"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = ["click>=8.1.7", "pillow>=10.4.0", "pymupdf>=1.24.11", "term-image>=0.7.2"]
 
 [project.scripts]
