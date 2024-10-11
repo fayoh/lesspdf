@@ -42,8 +42,9 @@ class Application:
         elif direction == self.DOWN:
             click.echo("Scrolling down.")
 
-    def resize_handler(self, _signum: int, _frame: FrameType) -> None:
+    def resize_handler(self, _signum: int, _frame: FrameType | None) -> None:
         """Handle window resize signal."""
+        click.echo(f"Signal {_signum} received.")
         click.echo("Window resized.")
 
 
