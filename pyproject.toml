@@ -14,7 +14,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv]
-dev-dependencies = ["mypy>=1.11.2", "pytest-coverage>=0.0", "pytest>=8.3.3", "ruff>=0.6.9"]
+dev-dependencies = ["deptry>=0.20.0", "mypy>=1.11.2", "pytest-coverage>=0.0", "pytest>=8.3.3", "ruff>=0.6.9"]
 
 [tool.ruff]
 target-version = "py310"
@@ -82,3 +82,6 @@ convention = "pep257"
 
 [tool.pytest.ini_options]
 addopts = "--cov=lesspdf --cov-report=term-missing --cov-report=xml --cov-fail-under=78 --cov-branch"
+
+[tool.deptry]
+known_first_party = ["lesspdf"]
