@@ -1,5 +1,5 @@
 name: CI
-run-name: ${{ github.event_name }} ${{ github.ref_name }} ${{ github.event.number}}
+run-name: ${{ github.event_name }} ${{ github.ref_name }}
 on:
   push:
     branches:
