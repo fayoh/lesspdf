@@ -1,5 +1,7 @@
 """Main logic for the application."""
 
+from types import FrameType
+
 import click
 
 from lesspdf.document import Document
@@ -40,7 +42,7 @@ class Application:
         elif direction == self.DOWN:
             click.echo("Scrolling down.")
 
-    def resize_handler(self, _signum, _frame) -> None:
+    def resize_handler(self, _signum: int, _frame: FrameType) -> None:
         """Handle window resize signal."""
         click.echo("Window resized.")
 

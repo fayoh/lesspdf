@@ -1,3 +1,5 @@
+"""Unit tests for the Application class."""
+
 from importlib.resources import as_file, files
 from pathlib import Path
 from unittest.mock import patch

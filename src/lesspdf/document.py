@@ -15,7 +15,8 @@ class Document:
 
 
 class DocumentFileError(Exception):
-    def __init__(self, file_path: str) -> None:
-        super().__init__(f"Could not open: {file_path}")
-
     """Error raised when a document file cannot be opened."""
+
+    def __init__(self, file_path: str) -> None:
+        """Initialize the error with the file path."""
+        super().__init__(f"Could not open: {file_path}")
