@@ -1,5 +1,8 @@
+"""Unit tests for the Application class."""
+
 from importlib.resources import as_file, files
 from pathlib import Path
+from signal import Signals
 from unittest.mock import patch
 
 import pytest
@@ -71,4 +74,4 @@ def test_application_resize_handler() -> None:
     with as_file(resource_dir.joinpath("example.pdf")) as pdf:
         document = Document(pdf)
         app = Application(document)
-        app.resize_handler(None, None)
+        app.resize_handler(Signals.SIGWINCH, None)

@@ -1,3 +1,5 @@
+"""Unit tests for the Document class."""
+
 from pathlib import Path
 
 import pytest
@@ -5,7 +7,7 @@ import pytest
 from lesspdf.document import Document, DocumentFileError
 
 
-def test_document_initialization_with_valid_file(tmp_path) -> None:
+def test_document_initialization_with_valid_file(tmp_path: Path) -> None:
     """Test Document initialization with a valid file."""
     # Create a temporary file
     temp_file = tmp_path / "test.pdf"
