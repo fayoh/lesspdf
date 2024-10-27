@@ -1,6 +1,5 @@
 """Class for handling the document object."""
 
-from functools import cached_property
 from pathlib import Path
 
 import PIL
@@ -13,7 +12,13 @@ from pymupdf import FileDataError  # type: ignore
 
 
 class Document:
-    """Class for handling the document object."""
+    """Class for handling the document object.
+
+    Attributes:
+        file (Path): The path to the document file.
+        page_number (int): The current page number.
+        num_pages (int): The total number of pages in the document.
+    """
 
     def __init__(self, path: Path) -> None:
         """Initialize the document object from a file.
@@ -24,15 +29,12 @@ class Document:
         """
         self.file: Path = path
         self.page_number: int = 0
+
         try:
             self._document = pymupdf.open(str(self.file))
         except FileDataError as e:
             raise DocumentFileError(str(self.file)) from e
-
-    @cached_property
-    def num_pages(self) -> int:
-        """Return the number of pages in the document."""
-        return len(self._document)
+        self.num_pages = len(self._document)
 
     def get_page_image(self) -> PIL.Image.Image:
         """Return an image of the current page.
@@ -52,7 +54,7 @@ class Document:
             mode = "L"
         elif colorspace.n == 1:
             mode = "L" if new_pixmap.alpha == 0 else "LA"
-        elif colorspace.n == 3:
+        elif colorspace.n == 3:  # noqa: PLR2004
             mode = "RGB" if new_pixmap.alpha == 0 else "RGBA"
         else:
             mode = "CMYK"

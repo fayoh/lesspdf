@@ -28,9 +28,11 @@ def test_application_init() -> None:
 
 def test_application_init_bad_file() -> None:
     """Minimal test."""
-    non_existent_filename = "non-existent.pdf"
-    with pytest.raises(DocumentFileError, match=f".*{non_existent_filename}") as exc_info:
-        Document(Path(non_existent_filename))
+    with (
+        as_file(resource_dir.joinpath("corrupt.pdf")) as pdf,
+        pytest.raises(DocumentFileError, match=f".*{pdf}") as exc_info,
+    ):
+        Document(Path(pdf))
 
     with pytest.raises(DocumentFileError), as_file(resource_dir) as r_dir:
         Document(r_dir)

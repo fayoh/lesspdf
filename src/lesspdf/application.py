@@ -5,6 +5,7 @@ from types import FrameType
 import click
 
 from lesspdf.document import Document
+from term_image.image import AutoImage  # type: ignore
 
 
 class Application:
@@ -18,10 +19,19 @@ class Application:
     def __init__(self, document: Document) -> None:
         """Initialize application with a parsed document.
 
-        Setup will open the document and setup the terminal.
+        Setup will open the document, set up the terminal
+        and display the first page.
         """
         self.document = document
         click.echo(f"Creating application with file: {document.file}")
+
+        try:
+            self.image = AutoImage(document.get_page_image())
+        except Exception as e:
+            raise TerminalSetupError(str(e)) from e
+
+        click.clear()
+        self.image.draw()
 
     def go_to_page_relative(self, page_offset: int) -> None:
         """Move to a page relative to the current page."""
@@ -50,3 +60,7 @@ class Application:
 
 class TerminalSetupError(Exception):
     """Error raised when the terminal cannot be set up."""
+
+    def __init__(self, message: str) -> None:
+        """Initialize the error with a message from the original exception."""
+        super().__init__(f"Terminal setup error: {message}")

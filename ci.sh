@@ -18,26 +18,26 @@ TMPLOG=$(mktemp)
 # The twelfth element is the exit code to expect from the command to run if the exit code is not as expected
 
 
-echo -n "ruff check:\t"
+echo -ne "ruff check:\t"
 uv run ruff check . 2> $TMPLOG
 if [ $? -ne 0 ]; then
-    echo "Ruff check failed:\n"
+    echo -e "Ruff check failed:\n"
     cat $TMPLOG
     exit 1
 fi
 
-echo -n "mypy:\t\t"
+echo -ne "mypy:\t\t"
 uv run mypy . 2> $TMPLOG
 if [ $? -ne 0 ]; then
-    echo "Mypy failed:\n"
+    echo -e "Mypy failed:\n"
     cat $TMPLOG
     exit 1
 fi
 
-echo -n "deptry:\t\t"
+echo -ne "deptry:\t\t"
 uv run deptry . 2> /tmp/deptry
 if [ $? -ne 0 ]; then
-    echo "Deptry failed:\n"
+    echo -e "Deptry failed:\n"
     cat /tmp/deptry
     exit 1
 else
@@ -47,10 +47,10 @@ fi
 # Run pytest for all supported Python versions
 for PYVER in 3.11 3.12 3.13; do
     #redirect both stdout and stderr to a file
-    echo -n "pytest $PYVER:\t"
+    echo -ne "pytest $PYVER:\t"
     uv run -p $PYVER pytest  > $TMPLOG 2>&1
     if [ $? -ne 0 ]; then
-        echo "Pytest failed for Python $PYVER:\n"
+        echo -e "Pytest failed for Python $PYVER:\n"
         cat $TMPLOG
         exit 1
     else

@@ -48,7 +48,6 @@ def create_key_function_map(app: Application) -> dict[str, Callable]:
         InputKeys.K_DN: partial(app.scroll, direction=app.DOWN),
         InputKeys.ZOOM_IN: partial(app.zoom, direction=app.IN),
         InputKeys.ZOOM_OUT: partial(app.zoom, direction=app.OUT),
-        InputKeys.QUIT: sys.exit,
     }
 
 
@@ -59,8 +58,6 @@ def create_key_function_map(app: Application) -> dict[str, Callable]:
 )
 def main(file: Path) -> NoReturn:
     """Start the application."""
-    click.echo(f"Hello from lesspdf! Opening {file}.")
-
     try:
         document = Document(file)
     except DocumentFileError as e:
@@ -78,7 +75,9 @@ def main(file: Path) -> NoReturn:
 
     key_function_map = create_key_function_map(app)
 
-    while True:
-        user_input = click.getchar()
+    while (user_input := click.getchar()) != InputKeys.QUIT:
         if fun := key_function_map.get(user_input):
             fun()
+
+    click.clear()
+    sys.exit(0)
