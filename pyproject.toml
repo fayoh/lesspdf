@@ -85,3 +85,6 @@ addopts = "--cov=lesspdf --cov-report=term-missing --cov-report=xml --cov-fail-u
 
 [tool.deptry]
 known_first_party = ["lesspdf"]
+
+[tool.deptry.per_rule_ignores]
+DEP002 = ["pytest-cov"]
