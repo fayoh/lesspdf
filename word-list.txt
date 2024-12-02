@@ -1,3 +1,7 @@
+colorspace
+frombytes
 getchar
 lesspdf
+pixmap
+pymupdf
 SIGWINCH

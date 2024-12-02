@@ -1,34 +1,39 @@
 """Unit tests for the Document class."""
 
-from pathlib import Path
+from importlib.resources import as_file, files
 
 import pytest
 
 from lesspdf.document import Document, DocumentFileError
+from tests import resources
+
+resource_dir = files(resources)
 
 
-def test_document_initialization_with_valid_file(tmp_path: Path) -> None:
+def test_document_initialization_with_valid_file() -> None:
     """Test Document initialization with a valid file."""
-    # Create a temporary file
-    temp_file = tmp_path / "test.pdf"
-    temp_file.write_text("dummy content")
+    with as_file(resource_dir.joinpath("example.pdf")) as pdf:
+        doc = Document(pdf)
 
-    # Initialize Document with the temporary file
-    doc = Document(temp_file)
-
+    expected_num_pages = 4
     # Assertions
-    assert doc.file == temp_file
+    assert doc.file == pdf
     assert doc.page_number == 0
+    assert doc.num_pages == expected_num_pages
 
 
 def test_document_initialization_with_invalid_file() -> None:
     """Test Document initialization with an invalid file."""
-    # Path to a non-existent file
-    invalid_file = Path("/non/existent/file.pdf")
-
     # Expect DocumentFileError to be raised
-    with pytest.raises(DocumentFileError) as exc_info:
-        Document(invalid_file)
+    with as_file(resource_dir.joinpath("corrupt.pdf")) as pdf, pytest.raises(DocumentFileError) as _exc_info:
+        Document(pdf)
 
-    # Assertions
-    assert str(exc_info.value) == f"Could not open: {invalid_file}"
+
+def test_get_page_image() -> None:
+    """Test getting an image of a page."""
+    with as_file(resource_dir.joinpath("example.pdf")) as pdf:
+        doc = Document(pdf)
+        image = doc.get_page_image()
+        assert image is not None
+        assert image.width > 0
+        assert image.height > 0

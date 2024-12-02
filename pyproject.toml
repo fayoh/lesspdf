@@ -21,7 +21,7 @@ target-version = "py310"
 line-length = 120
 fix = false
 
-select = [
+lint.select = [
     "A",     # flake8-builtins
     "ANN",   # flake8-annotations
     "ASYNC", # flake8-async
@@ -70,6 +70,7 @@ select = [
     "W",     # Pycodestyle warnings
     "YTT",   # flake8-2020
 ]
+lint.ignore = ["COM812", "ISC001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
@@ -79,7 +80,9 @@ convention = "pep257"
 "__init__.py" = ["D104"]
 
 [tool.pytest.ini_options]
-addopts = "--cov=lesspdf --cov-report=term-missing --cov-report=xml --cov-fail-under=77 --cov-branch"
+# Ignore deprecation warnings from Py_LIMITED_API https://github.com/swig/swig/issues/2881#issuecomment-2332652634
+filterwarnings = "ignore:.*(swigvarlink|SwigPyPacked|SwigPyObject).*"
+addopts = "--cov=lesspdf --cov-report=term-missing --cov-report=xml --cov-fail-under=78 --cov-branch"
 
 [tool.deptry]
 known_first_party = ["lesspdf"]
