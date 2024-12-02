@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["click~=8.1", "pillow~=10.4", "pymupdf~=1.24", "pytest-cov~=6.0", "term-image~=0.7"]
+dependencies = ["click~=8.1", "pillow~=11.0", "pymupdf~=1.24", "pytest-cov~=6.0", "term-image~=0.7"]
 
 [project.scripts]
 lesspdf = "lesspdf:main"
