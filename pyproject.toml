@@ -21,7 +21,7 @@ target-version = "py310"
 line-length = 120
 fix = false
 
-select = [
+lint.select = [
     "A",     # flake8-builtins
     "ANN",   # flake8-annotations
     "ASYNC", # flake8-async
@@ -70,6 +70,7 @@ select = [
     "W",     # Pycodestyle warnings
     "YTT",   # flake8-2020
 ]
+lint.ignore = ["COM812", "ISC001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

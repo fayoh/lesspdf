@@ -26,6 +26,16 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+echo -ne "ruff format:\t"
+uv run ruff format --diff . 2> $TMPLOG
+if [ $? -ne 0 ]; then
+    echo -e "Ruff check failed:\n"
+    cat $TMPLOG
+    exit 1
+else
+    echo "No formatting issues found."
+fi
+
 echo -ne "mypy:\t\t"
 uv run mypy . 2> $TMPLOG
 if [ $? -ne 0 ]; then

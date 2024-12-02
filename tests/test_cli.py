@@ -13,14 +13,16 @@ from tests import resources
 
 resource_dir = files(resources)
 
+
 @pytest.fixture
 def runner() -> CliRunner:
     """Fixture for invoking CLI commands."""
     return CliRunner()
 
 
-# TODO: Use cli runner with temp dir for safety and point to any temporary file.
-# When mocking the document class there is no need for real docuemtsn.
+# TODO: Use cli runner with temp dir for safety and point to any
+# temporary file. When mocking the document class there is no need for
+# real documents.
 
 
 @pytest.mark.timeout(5)
@@ -59,6 +61,7 @@ def test_corrupt_file(_mock_document: MagicMock, runner: CliRunner) -> None:  # 
     assert result.exit_code == 1
     assert "test_marker_error" in result.output
 
+
 @pytest.mark.timeout(5)
 @patch("lesspdf.cli.Document")
 @patch("lesspdf.cli.Application", side_effect=TerminalSetupError("Terminal error"))
@@ -68,7 +71,8 @@ def test_main_terminal_setup_error(_mock_application: MagicMock, _mock_document:
         result = runner.invoke(main, args=[str(pdf)])
     assert result.exit_code == 1
 
-#@pytest.mark.timeout(5)
+
+@pytest.mark.timeout(5)
 @patch("lesspdf.cli.Document")
 @patch("lesspdf.cli.Application")
 def test_input(mock_application: MagicMock, _mock_document: MagicMock, runner: CliRunner) -> None:  # noqa: PT019
@@ -79,6 +83,7 @@ def test_input(mock_application: MagicMock, _mock_document: MagicMock, runner: C
     assert result.exit_code == 0
     # 1 for each key press + resize_handler and init
     assert len(mock_application.mock_calls) == len(input_str) + 1
+
 
 # @pytest.mark.timeout(5)
 # @patch("lesspdf.cli.signal.signal")
